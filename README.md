@@ -15,6 +15,6 @@ The scripts are made for Debian and Arch in mind but should be cross-compatible 
 ```
 git clone https://github.com/sevu11/Linux-Post-Installation.git
 cd Linux-Post-Installation
-chmod +x 1.post_install.sh
+chmod +x post_install.sh
 ./post_install.sh
 ```
