@@ -66,8 +66,8 @@ detect_package_manager
 install_dependencies "$pkg_mgr"
 
 # Clone Picom repository and build using Meson/Ninja
-git clone https://github.com/FT-Labs/picom ~/post-install-scripts/picom
-cd ~/post-install-scripts/picom
+git clone https://github.com/FT-Labs/picom ~/post-install-scripts/scripts/picom
+cd ~/post-install-scripts/scripts/picom
 meson setup --buildtype=release build
 ninja -C build
 sudo ninja -C build install

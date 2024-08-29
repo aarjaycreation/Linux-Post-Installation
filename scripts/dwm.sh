@@ -239,8 +239,3 @@ install_from_source() {
 install_from_source "~/.config/suckless/dwm"
 install_from_source "~/.config/suckless/slstatus"
 install_from_source "~/.config/suckless/st"
-
-# Install additional scripts and themes
-bash ~/bookworm-scripts/install_scripts/picom.sh
-bash ~/bookworm-scripts/install_scripts/nerdfonts.sh
-bash ~/bookworm-scripts/colorschemes/blue.sh
