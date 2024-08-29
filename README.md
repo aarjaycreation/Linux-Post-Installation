@@ -1,3 +1,6 @@
+# !! UNDER DEVELOPMENT !! 
+
+
 # Post Installation Scripts
 
 ```
@@ -7,3 +10,11 @@ Fully automated under 3 minutes >> https://github.com/sevu11/arch-server-script
 
 My personal dotfiles and post-installation scripts for a new Linux install.
 The scripts are made for Debian and Arch in mind but should be cross-compatible with any Linux distrubution. 
+
+## Instructions
+```
+git clone https://github.com/sevu11/Linux-Post-Installation.git
+cd Linux-Post-Installation
+chmod +x 1.post_install.sh
+./post_install.sh
+```
