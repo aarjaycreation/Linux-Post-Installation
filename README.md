@@ -1,2 +1,2 @@
-# archlinux_post_install
-Post Install scripts for Arch Linux
+# Post Installation Scripts
+My personal dotfiles and post-installation scripts for a new Linux install.
