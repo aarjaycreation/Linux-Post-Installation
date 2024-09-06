@@ -65,10 +65,11 @@ static const char unknown_str[] = "n/a";
  */
 static const struct arg args[] = {
 /* 	function format          argument */
+	{ run_command, 	"^c#d791a8^ ^c#FFFFFF^%s",  		"curl -s "wttr.in/sundsvall?format=1" | awk '{print $NF}'" },
 	{ run_command, 	"^c#d791a8^ Updates: ^c#FFFFFF^%s",  	"aptitude search '~U' | wc -l" },
 /*	{ disk_perc, 	"^c#d791a8^ Disk: ^c#FFFFFF^%s%%", 	"/", NULL }, */
 	{ cpu_perc, 	"^c#d791a8^ CPU:^c#FFFFFF^ %s%%", 	NULL },
-	{ ram_perc, 	"^c#d791a8^ RAM:^c#FFFFFF^ %s%%",	 	NULL },
-	{ datetime, 	"^c#d791a8^ %s", 		"%a %b %-d" 	},
- 	{ datetime, 	"^c#FFFFFF^ %s", 		"%H:%M:%S " 	},	
+	{ ram_perc, 	"^c#d791a8^ RAM:^c#FFFFFF^ %s%%",	NULL },
+	{ datetime, 	"^c#d791a8^ %s", "%a %b %-d" 		},
+ 	{ datetime, 	"^c#FFFFFF^ %s", "%H:%M:%S " 		},	
 	};
