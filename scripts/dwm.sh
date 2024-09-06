@@ -127,7 +127,7 @@ read_common_packages() {
 }
 
 # Read common packages from file
-read_common_packages "$HOME/bookworm-scripts/install_scripts/common_packages.txt"
+read_common_packages "$HOME/install_scripts/common_packages.txt"
 
 # Install main packages
 install_packages "${packages[@]}"
@@ -199,41 +199,29 @@ EOF
     rm "$temp_file"
 fi
 
-# Clone or check existing jag_dots repository
-SCRIPT_DIR=~/bookworm-scripts
-REPO_URL=https://github.com/drewgrif/jag_dots.git
-
-if [ -d "$SCRIPT_DIR/jag_dots" ]; then
-    :
-else
-    git clone "$REPO_URL" "$SCRIPT_DIR/jag_dots"
-    if [ $? -ne 0 ]; then
-        exit 1
-    fi
-fi
-
 # Copy configuration files
-cp -r ~/bookworm-scripts/jag_dots/scripts/ ~
-cp -r ~/bookworm-scripts/jag_dots/.config/dunst/ ~/.config/
-cp -r ~/bookworm-scripts/jag_dots/.config/kitty/ ~/.config/
-cp -r ~/bookworm-scripts/jag_dots/.config/rofi/ ~/.config/
-cp -r ~/bookworm-scripts/jag_dots/.config/picom/ ~/.config/
-cp -r ~/bookworm-scripts/jag_dots/.config/backgrounds/ ~/.config/
+cp -r ~/post-install-scripts/dotfiles/scripts/ ~
+cp -r ~/post-install-scripts/dotfiles/.config/dunst/ ~/.config/
+cp -r ~/post-install-scripts/dotfiles/.config/kitty/ ~/.config/
+cp -r ~/post-install-scripts/dotfiles/.config/rofi/ ~/.config/
+cp -r ~/post-install-scripts/dotfiles/.config/picom/ ~/.config/
+cp -r ~/post-install-scripts/dotfiles/.config/backgrounds/ ~/.config/
 
 # Move autostart script
 mkdir -p ~/.local/share/dwm
-cp -r ~/bookworm-scripts/jag_dots/.local/share/dwm/autostart.sh ~/.local/share/dwm/
+cp -r ~/post-install-scripts/jag_dots/.local/share/dwm/autostart.sh ~/.local/share/dwm/
 chmod +x ~/.local/share/dwm/autostart.sh
 
 # Move patched dwm, slstatus, and st
-cp -r ~/bookworm-scripts/jag_dots/.config/suckless/ ~/.config/
+cp -r ~/post-install-scripts/dotfiles/.config/suckless/ ~/.config/
 
 # Install custom dwm, slstatus, and st
 install_from_source() {
-    local repo_path="$1"
-    cd "$repo_path" || exit
-    make
-    sudo make clean install
+    local dir_name="$1"
+    cd ~/.config/suckless/"$dir_name" || { echo "Failed to change directory to ~/.config/suckless/$dir_name"; exit 1; }
+    make || { echo "Make failed for $dir_name"; exit 1; }
+    sudo make clean install || { echo "Make clean install failed for $dir_name"; exit 1; }
+    cd - > /dev/null || { echo "Failed to return to previous directory"; exit 1; }
 }
 
 install_from_source "~/.config/suckless/dwm"
