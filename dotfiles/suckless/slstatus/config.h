@@ -57,11 +57,11 @@ check_updates       	Check for updates               NULL
 
 static const struct arg args[] = {
 /* 	function format  	argument */
-	{ run_command, 	 	"^c#d791a8^  ^c#FFFFFF^ %s",  			"curl -s "wttr.in/sundsvall?format=1" | awk '{print $NF}'" },
-	{ check_updates, 	"^c#d791a8^  Updates: ^c#FFFFFF^ %d", 	"apt list --upgradable 2>/dev/null | grep -c 'upgradable'" },
-	{ vol_perc,			"^c#d791a8^  Vol:^c#FFFFFF^ %s%%",		"/dev/mixer" },
-	{ cpu_perc, 	 	"^c#d791a8^  CPU:^c#FFFFFF^ %s%%", 		NULL },
-	{ ram_perc, 	 	"^c#d791a8^  RAM:^c#FFFFFF^ %s%%",		NULL },
-	{ datetime, 		"^c#d791a8^  %s", "%a %b %-d" 				 },
- 	{ datetime, 		"^c#FFFFFF^  %s", "%H:%M:%S " 				 },	
+	{ run_command, "^c#d791a8^^c#FFFFFF^ %s", "curl -s \"wttr.in/sundsvall?format=1\" | awk '{$1=$1;print}'" },
+	{ check_updates, 	"^c#d791a8^   ^c#FFFFFF^%s", "check_updates" },
+	//{ vol_perc,			"^c#d791a8^  ^c#FFFFFF^ %s%%",		"/dev/mixer" },
+	{ cpu_perc, 	 	"^c#d791a8^  ^c#FFFFFF^ %s%%", 		NULL },
+	{ run_command, "^c#d791a8^  ^c#FFFFFF^ %s", "free -g | awk '/^Mem:/ {print $3 \"G/\" $2 \"G\"}'" },
+	{ datetime, 		"^c#d791a8^  󰥔 %s", "%a %b %-d" 				 },
+ 	{ datetime, 		"^c#FFFFFF^ %s", "%H:%M:%S " 				 },	
 };
