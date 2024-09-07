@@ -2,6 +2,7 @@
 
 GREEN="\033[1;32m"
 RED="\033[1;31m"
+YELLOW="\033[1;33m"
 NC="\033[0m"
 
 if command -v apt > /dev/null 2>&1; then
@@ -15,7 +16,7 @@ if command -v apt > /dev/null 2>&1; then
         fi
     fi
 
-    echo "Installing dependencies..."
+    echo -e "${YELLOW}Installing dependencies..."
     # Define a list of main packages
     packages=(
         "xorg-dev"
@@ -37,7 +38,7 @@ if command -v apt > /dev/null 2>&1; then
                 packages+=("$pkg")
             done < "$common_file"
         else
-            echo "Common packages file not found: $common_file"
+            echo -e "${RED}Common packages file not found: $common_file"
         fi
     }
 
@@ -55,7 +56,7 @@ if command -v apt > /dev/null 2>&1; then
 
         # Install missing packages
         if [ ${#missing_pkgs[@]} -gt 0 ]; then
-            echo "Installing missing packages: ${missing_pkgs[@]}"
+            echo -e "${YELLOW}Installing missing packages: ${missing_pkgs[@]}"
             if command -v nala > /dev/null 2>&1; then
                 sudo nala update
                 sudo nala install -y "${missing_pkgs[@]}"
@@ -77,6 +78,6 @@ if command -v apt > /dev/null 2>&1; then
     install_packages "${packages[@]}"
 
 else
-    echo "Launching linutil..."
+    echo -e "${YELLOW}Launching linutil"
     curl -fsSL https://christitus.com/linux | sh
 fi

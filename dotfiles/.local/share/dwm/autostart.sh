@@ -1,6 +1,12 @@
 #!/usr/bin/env bash
+# Set resolution
 xrandr -s 1920x1080 &
 
+# Disable monitor powersaving
+xset s off &
+xset -dpms &
+
+# Launch Statusbar
 slstatus &
 
 # polkit
