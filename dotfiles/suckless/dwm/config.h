@@ -19,7 +19,7 @@ static const int focusedontoptiled  		= 1;        	/* 1 means focused tile clien
 
 static const char *fonts[]          		= { 
 /* "JetBrainsMono Nerd Font:size=10",*/ 
-"FiraCode Nerd Font Mono:size=15" };
+"FiraCode Nerd Font Mono:size=14" };
 
 static const char dmenufont[]       		= "monospace:size=12";
 static const char col_gray1[]       		= "#00141d";
@@ -33,6 +33,8 @@ static const char *colors[][3]      		= {
 	[SchemeSel]  = { col_gray4, col_cyan,  col_barbie  },
 };
 
+#define ICONSIZE 18   /* icon size */
+#define ICONSPACING 6 /* space between icon and title */
 
 
 typedef struct {
