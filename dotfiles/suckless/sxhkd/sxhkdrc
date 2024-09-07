@@ -66,6 +66,12 @@ super + @Print
 
 @Print
 	flameshot full --path ~/Screenshots/
+
+super + p
+	flameshot gui --path ~/Screenshots/
+
+shift + super + p
+	flameshot full --path ~/Screenshots/
 	
 super + ctrl + q 
 	~/scripts/power
