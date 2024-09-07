@@ -1,13 +1,17 @@
 #!/bin/bash
 
+GREEN="\033[1;32m"
+RED="\033[1;31m"
+NC="\033[0m"
+
 if command -v apt > /dev/null 2>&1; then
     # Attempt to install nala
     if ! command -v nala > /dev/null 2>&1; then
         echo "Attempting to install nala..."
         if ./install_nala; then
-            echo "Nala installed successfully."
+            echo -e "${GREEN}Nala installed successfully."
         else
-            echo "Failed to install nala. Falling back to apt."
+            echo -e "${RED}Failed to install nala. Falling back to apt."
         fi
     fi
 
@@ -60,14 +64,14 @@ if command -v apt > /dev/null 2>&1; then
                 sudo apt install -y "${missing_pkgs[@]}"
             fi
             if [ $? -ne 0 ]; then
-                echo "Failed to install some packages."
+                echo -e "${RED}Failed to install some packages.${NC}"
             fi
         else
-            echo "All required packages are already installed."
+            echo -e "${GREEN}All required packages are already installed.${NC}"
         fi
     }
 
-    common_packages_file="$HOME/Linux-Post-Installation/common_packages.txt"
+    common_packages_file="$HOME/Linux-Post-Installation/scripts/common_packages.txt"
     read_common_packages "$common_packages_file"
 
     install_packages "${packages[@]}"
