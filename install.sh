@@ -17,9 +17,11 @@ echo -e "${GREEN}---------------------------------------------------${NC}"
 
 cd "$HOME/Linux-Post-Installation/scripts"
 
-# Make sure that install_packages & script is executable
+# Make sure all scripts are executable
+
 sudo chmod +x install_packages
 sudo chmod +x install_nala
+sudo chmod +x picom
 ./install_packages
 
 echo -e "${GREEN}---------------------------------------------------"
