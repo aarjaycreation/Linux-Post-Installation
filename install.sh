@@ -62,7 +62,7 @@ echo -e "${GREEN}---------------------------------------------------${NC}"
 if command -v apt > /dev/null 2>&1; then
     sudo dpkg-reconfigure tzdata
 else
-    echo -e "${YELLOW}Unable to detect Debian. Skipping."
+    echo -e "${YELLOW}Unable to detect APT. Skipping."
 fi
 
 echo -e "${GREEN}---------------------------------------------------"
