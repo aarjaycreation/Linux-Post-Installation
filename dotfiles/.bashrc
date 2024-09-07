@@ -151,23 +151,24 @@ alias vis='nvim "+set si"'
 
 # re-compile suckless
 mi() {
-
     GREEN="\033[1;32m"
     NC="\033[0m"
     
     echo -e "${GREEN}==============================="
     echo -e "${GREEN}Re-compiling DWM"
     echo -e "${GREEN}===============================${NC}"
-
-    cd "$HOME/.config/suckless/dwm" && sudo make install
-
+    
+    cd "$HOME/.config/suckless/dwm" || { echo "Directory not found: $HOME/.config/suckless/dwm"; exit 1; }
+    sudo make install
+    
     echo -e "${GREEN}==============================="
     echo -e "${GREEN}Re-compiling SLSTATUS"
     echo -e "${GREEN}===============================${NC}"
-
-    cd "$HOME/.config/suckless/slstatus" && sudo make install
     
+    cd "$HOME/.config/suckless/slstatus" || { echo "Directory not found: $HOME/.config/suckless/slstatus"; exit 1; }
+    sudo make install
 }
+
 
 # Change directory aliases
 alias home='cd ~'
