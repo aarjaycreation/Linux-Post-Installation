@@ -77,6 +77,28 @@ if command -v apt > /dev/null 2>&1; then
 
     install_packages "${packages[@]}"
 
+    # Enable services
+    sudo systemctl enable avahi-daemon
+    sudo systemctl enable acpid
+
+    # Update user directories
+    xdg-user-dirs-update
+    mkdir -p ~/Screenshots/
+
+    # Ensure /usr/share/xsessions directory exists
+    if [ ! -d /usr/share/xsessions ]; then
+        sudo mkdir -p /usr/share/xsessions
+        if [ $? -ne 0 ]; then
+            echo "Failed to create /usr/share/xsessions directory. Exiting."
+        fi
+    fi
+
+    if ./picom; then
+        echo -e "${GREEN}Picom installed successfully."
+    else
+        echo -e "${RED}Failed to install picom."
+    fi
+
 else
     echo -e "${YELLOW}Launching linutil"
     curl -fsSL https://christitus.com/linux | sh
