@@ -9,8 +9,10 @@ fi
 #######################################################
 # SOURCED ALIAS'S AND SCRIPTS BY zachbrowne.me
 #######################################################
-if [ -f /usr/bin/fastfetch ]; then
-	fastfetch
+if [ -n "$DISPLAY" ] && pgrep -x "dwm" > /dev/null; then
+    if [ -f /usr/bin/fastfetch ]; then
+        fastfetch
+    fi
 fi
 
 # Source global definitions
