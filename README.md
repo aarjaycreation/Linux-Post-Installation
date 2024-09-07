@@ -21,3 +21,7 @@ cd Linux-Post-Installation
 chmod +x install.sh
 ./install.sh
 ```
+
+## Credit
+* Install package code is inspired by drewgrif [LINK](https://github.com/drewgrif)
+* ChrisTitusTech for the Linutil [LINK](https://github.com/ChrisTitusTech)
