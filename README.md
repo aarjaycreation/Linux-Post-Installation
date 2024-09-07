@@ -1,7 +1,4 @@
-# !! UNDER DEVELOPMENT !! 
-
-
-# Post Installation Scripts
+# My Post Installation Scripts
 
 ```
 If you're looking for a minimal Arch Linux install:
