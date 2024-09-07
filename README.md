@@ -18,6 +18,10 @@ cd Linux-Post-Installation
 chmod +x install.sh
 ./install.sh
 ```
+## Demo
+![Script output](https://raw.githubusercontent.com/sevu11/Linux-Post-Installation/main/demo.png)
+
+
 
 ## Credit
 * Install package code is inspired by drewgrif [LINK](https://github.com/drewgrif)
