@@ -48,12 +48,12 @@ const char *spcmd2[] = {"alacritty", "--class", "spterm2", "--title", "ranger", 
 static Sp scratchpads[] = {
 	/* name          cmd  */ 
 	{"spterm1",      spcmd1},
-	{"spterm2",      spcmd2},
+	{"spterm2",      spcmd2}, 
 };
 
 /* tagging */
 //static const char *tags[] = { "1", "2", "3", "4", "5", "6", "7", "8", "9", "10", "11", "12" };
-static const char *tags[] = { "", "", "", "", "󰙯", "󰓓" };
+static const char *tags[] = { "", "", "", "", "󰙯", "" };
 
 static const Rule rules[] = {
 	/* class      			instance    	title       		tags mask     	isfloating   alwaysontop	monitor */
@@ -69,8 +69,8 @@ static const Rule rules[] = {
 
 
 /* window following */
-#define WFACTIVE '>'
-#define WFINACTIVE 'v'
+#define WFACTIVE ''
+#define WFINACTIVE ''
 #define WFDEFAULT WFACTIVE
 
 /* layout(s) */
@@ -84,8 +84,8 @@ static const int lockfullscreen = 1; /* 1 will force focus on the fullscreen win
 
 static const Layout layouts[] = {
 	/* symbol     arrange function */
-	{ "",	      dwindle },
-	{ "",        centeredfloatingmaster }, /* first entry is default */
+	{ "󰓫 ",	      dwindle },
+	{ " ",       centeredfloatingmaster }, /* first entry is default */
 	{ "|M|",      centeredmaster },	
 	{ "[]=",      tile },
 	{ "TTT",      bstack },

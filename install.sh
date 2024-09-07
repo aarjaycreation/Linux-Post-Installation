@@ -69,9 +69,10 @@ echo -e "${GREEN}---------------------------------------------------"
 echo -e "${GREEN}            Building DWM and SLStatus"
 echo -e "${GREEN}---------------------------------------------------${NC}"
 
-LOG_FILE="$HOME/build.log"
-
-sudo -u $USER bash -c "source $HOME/.bashrc && mi" > "$LOG_FILE" 2>&1
+cd "$HOME/.config/suckless/dwm"
+sudo make clean install 
+cd "$HOME/.config/suckless/slstatus"
+sudo make clean install 
 
 if [ $? -eq 0 ]; then
     echo -e "${GREEN}Build completed successfully.${NC}"

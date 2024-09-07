@@ -57,12 +57,12 @@ check_updates       	Check for updates               NULL
 
 static const struct arg args[] = {
 /* 	function format  	argument */
-	{ run_command, "^c#d791a8^^c#FFFFFF^ %s", "$HOME/scripts/openweather" },
-	{ check_updates, 	"^c#d791a8^   ^c#FFFFFF^%s", "check_updates" },
-	{ run_command, "^c#d791a8^  󰣚 ^c#FFFFFF^%s", "uname -r | awk -F'-' '{print $1\"-\"$2}'" },
-	{ run_command, "^c#d791a8^ ^c#FFFFFF^ %s", "$HOME/scripts/get_vol" },
-	{ cpu_perc, 	 	"^c#d791a8^  ^c#FFFFFF^ %s%%", 		NULL },
-	{ run_command, "^c#d791a8^  ^c#FFFFFF^ %s", "free -g | awk '/^Mem:/ {print $3 \"G/\" $2 \"G\"}'" },
-	{ datetime, 		"^c#d791a8^  󰥔 %s", "%a %b %-d" 				 },
- 	{ datetime, 		"^c#FFFFFF^ %s", "%H:%M:%S " 				 },	
+	{ run_command, 		"^c#d791a8^^c#FFFFFF^ %s", 			"$HOME/scripts/openweather" },
+	{ check_updates, 	"^c#d791a8^   ^c#FFFFFF^%s", 		"check_updates" },
+	{ run_command, 		"^c#d791a8^  󰣚 ^c#FFFFFF^%s", 		"uname -r | awk -F'-' '{print $1\"-\"$2}'" },
+	{ run_command, 		"^c#d791a8^ ^c#FFFFFF^ %s", 		"$HOME/scripts/get_vol" },
+	{ cpu_perc, 	 	"^c#d791a8^  ^c#FFFFFF^ %s%%", 	NULL },
+	{ run_command, 		"^c#d791a8^  ^c#FFFFFF^ %s", 		"free -g | awk '/^Mem:/ {print $3 \"G/\" $2 \"G\"}'" },
+	{ datetime, 		"^c#d791a8^  󰥔 %s", "%a %b %-d" 	},
+ 	{ datetime, 		"^c#FFFFFF^ %s", "%H:%M:%S " 		},	
 };
