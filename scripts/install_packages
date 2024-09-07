@@ -1,0 +1,78 @@
+#!/bin/bash
+
+if command -v apt > /dev/null 2>&1; then
+    # Attempt to install nala
+    if ! command -v nala > /dev/null 2>&1; then
+        echo "Attempting to install nala..."
+        if ./install_nala; then
+            echo "Nala installed successfully."
+        else
+            echo "Failed to install nala. Falling back to apt."
+        fi
+    fi
+
+    echo "Installing dependencies..."
+    # Define a list of main packages
+    packages=(
+        "xorg-dev"
+        "sxhkd"
+        "firefox-esr"
+        "tilix"
+        "kitty"
+        "flameshot"
+        "ranger"
+    )
+
+    # Function to read and append common packages from a file
+    read_common_packages() {
+        local common_file="$1"
+        if [ -f "$common_file" ]; then
+            while IFS= read -r pkg; do
+                # Ignore empty lines and comments
+                [[ -z "$pkg" || "$pkg" =~ ^# ]] && continue
+                packages+=("$pkg")
+            done < "$common_file"
+        else
+            echo "Common packages file not found: $common_file"
+        fi
+    }
+
+    # Function to install packages if they are not already installed
+    install_packages() {
+        local pkgs=("$@")
+        local missing_pkgs=()
+
+        # Check if each package is installed
+        for pkg in "${pkgs[@]}"; do
+            if ! dpkg -l | grep -qw "$pkg"; then
+                missing_pkgs+=("$pkg")
+            fi
+        done
+
+        # Install missing packages
+        if [ ${#missing_pkgs[@]} -gt 0 ]; then
+            echo "Installing missing packages: ${missing_pkgs[@]}"
+            if command -v nala > /dev/null 2>&1; then
+                sudo nala update
+                sudo nala install -y "${missing_pkgs[@]}"
+            else
+                sudo apt update
+                sudo apt install -y "${missing_pkgs[@]}"
+            fi
+            if [ $? -ne 0 ]; then
+                echo "Failed to install some packages."
+            fi
+        else
+            echo "All required packages are already installed."
+        fi
+    }
+
+    common_packages_file="$HOME/Linux-Post-Installation/common_packages.txt"
+    read_common_packages "$common_packages_file"
+
+    install_packages "${packages[@]}"
+
+else
+    echo "Launching linutil..."
+    curl -fsSL https://christitus.com/linux | sh
+fi

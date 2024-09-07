@@ -11,10 +11,11 @@ echo -e "${GREEN}---------------------------------------------------"
 echo -e "${GREEN}            Installing dependencies"
 echo -e "${GREEN}---------------------------------------------------${NC}"
 
-cd "$HOME/Linux-Post-Installation"
+cd "$HOME/Linux-Post-Installation/scripts"
 
 # Make sure that install_packages script is executable
 sudo chmod +x install_packages
+sudo chmod +x install_nala
 ./install_packages
 
 echo -e "${GREEN}---------------------------------------------------"
