@@ -15,11 +15,11 @@ chosen=$(echo -e "󰜺 Cancel\n󰍃 Logout\n⏻ Shutdown\n Reboot" | rofi -dm
 # Info about some states are available here:
 # https://www.freedesktop.org/software/systemd/man/systemd-sleep.conf.html#Description
 
-if [[ $chosen = "Logout" ]]; then
+if [[ $chosen = "󰍃 Logout" ]]; then
 	pkill dwm
-elif [[ $chosen = "Shutdown" ]]; then
+elif [[ $chosen = "⏻ Shutdown" ]]; then
 	systemctl poweroff
-elif [[ $chosen = "Reboot" ]]; then
+elif [[ $chosen = " Reboot" ]]; then
 	systemctl reboot
 elif [[ $chosen = "Suspend" ]]; then
 	systemctl suspend

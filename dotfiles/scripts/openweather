@@ -41,7 +41,7 @@ case "$icon" in
 esac
 
 #weather_info="${weather_icon} ${rounded_temperature}°C"
-weather_info="${weather_icon} $capitalized_description ${rounded_temperature}°C"
+weather_info="${weather_icon} ${rounded_temperature}°C"
 #weather_info="${rounded_temperature}°C"
 
 echo "$weather_info"
