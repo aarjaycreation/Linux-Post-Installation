@@ -1,4 +1,4 @@
-# My Post Installation Scripts
+# Sevu11's Post Installation Scripts
 
 ```
 If you're looking for a minimal Arch Linux install:
