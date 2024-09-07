@@ -59,7 +59,11 @@ echo -e "${GREEN}---------------------------------------------------"
 echo -e "${GREEN}                 Updating Timezone"
 echo -e "${GREEN}---------------------------------------------------${NC}"
 
-sudo dpkg-reconfigure tzdata
+if command -v apt > /dev/null 2>&1; then
+    sudo dpkg-reconfigure tzdata
+else
+    echo -e "${YELLOW}Unable to detect Debian. Skipping."
+fi
 
 echo -e "${GREEN}---------------------------------------------------"
 echo -e "${GREEN}            Building DWM and SLStatus"
