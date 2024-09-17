@@ -2,7 +2,6 @@
 #include <stdlib.h>
 #include <string.h>
 
-#include "../slstatus.h"
 #include "../util.h"
 
 const char *check_updates() {
@@ -11,10 +10,10 @@ const char *check_updates() {
     char command_output[10];
     
     // Execute the update command
-    system("apt update > /dev/null 2>&1");
+    system("pacman -Sy > /dev/null 2>&1");
     
     // Execute the command to count upgradable packages
-    fp = popen("apt list --upgradable 2>/dev/null | grep -c 'upgradable'", "r");
+    fp = popen("pacman -Qu 2>/dev/null | wc -l", "r");
     if (fp == NULL) {
         return "Error";
     }
