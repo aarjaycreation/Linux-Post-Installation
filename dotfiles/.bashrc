@@ -1,18 +1,17 @@
 #!/usr/bin/env bash
-iatest=$(expr index "$-" i)
-
-# Start X11 and DWM
-if [ -z "$DISPLAY" ] && [ "$(tty)" = /dev/tty1 ]; then
-    startx
-fi
+latest=$(expr index "$-" i)
 
 #######################################################
 # SOURCED ALIAS'S AND SCRIPTS BY zachbrowne.me
 #######################################################
-if [ -n "$DISPLAY" ] && pgrep -x "dwm" > /dev/null; then
-    if [ -f /usr/bin/fastfetch ]; then
-        fastfetch
-    fi
+
+if [ -z "$DISPLAY" ] && [ "$(tty)" = "/dev/tty1" ]; then
+    startx
+fi
+
+
+if [ ! -z "$DISPLAY" ]; then
+    fastfetch
 fi
 
 # Source global definitions
@@ -151,26 +150,6 @@ alias vi='nvim'
 alias svi='sudo vi'
 alias vis='nvim "+set si"'
 
-# re-compile suckless
-mi() {
-    GREEN="\033[1;32m"
-    NC="\033[0m"
-    
-    echo -e "${GREEN}==============================="
-    echo -e "${GREEN}Re-compiling DWM"
-    echo -e "${GREEN}===============================${NC}"
-    
-    cd "$HOME/.config/suckless/dwm" || { echo "Directory not found: $HOME/.config/suckless/dwm"; exit 1; }
-    sudo make install
-    
-    echo -e "${GREEN}==============================="
-    echo -e "${GREEN}Re-compiling SLSTATUS"
-    echo -e "${GREEN}===============================${NC}"
-    
-    cd "$HOME/.config/suckless/slstatus" || { echo "Directory not found: $HOME/.config/suckless/slstatus"; exit 1; }
-    sudo make install
-}
-
 
 # Change directory aliases
 alias home='cd ~'
@@ -272,9 +251,95 @@ alias docker-clean=' \
   docker network prune -f ; \
   docker volume prune -f '
 
+alias update='~/.scripts/update'
+
 #######################################################
 # SPECIAL FUNCTIONS
 #######################################################
+
+# Linutil 
+linutil(){
+
+	curl -fsSL https://www.christitus.com/linux | sh
+}
+
+linutil-dev(){
+
+	curl -fsSL https://www.christitus.com/linuxdev | sh
+}
+
+# Xprop for DWM rule array
+xp(){
+	xprop | awk '
+	/^WM_CLASS/{sub(/.* =/, "instance:"); sub(/,/, "\nclass:"); print}
+	/^WM_NAME/{sub(/.* =/, "title:"); print}'
+}
+
+# Make Install function 
+mi() {
+    GREEN="\033[1;32m"
+    NC="\033[0m"
+    
+    echo -e "${GREEN}==============================="
+    echo -e "${GREEN}Re-compiling DWM"
+    echo -e "${GREEN}===============================${NC}"
+    
+    cd "$HOME/.config/suckless/dwm" || { echo "Directory not found: $HOME/.config/suckless/dwm"; exit 1; }
+    sudo make install
+    
+    echo -e "${GREEN}==============================="
+    echo -e "${GREEN}Re-compiling SLSTATUS"
+    echo -e "${GREEN}===============================${NC}"
+    
+    cd "$HOME/.config/suckless/slstatus" || { echo "Directory not found: $HOME/.config/suckless/slstatus"; exit 1; }
+    sudo make install
+    
+    cd ~
+
+    clear
+    
+    sleep 1;
+
+    echo -e "${GREEN}------------------------------------"
+    echo -e "${GREEN}    DWM & SLStatus Re-Compiled!     "
+    echo -e "${GREEN}------------------------------------"
+    echo -e "${GREEN}Remember to Logout to apply changes."
+    echo -e "${GREEN}------------------------------------"
+}
+
+# Make Clean Install
+miclean() {
+    GREEN="\033[1;32m"
+    NC="\033[0m"
+    
+    echo -e "${GREEN}==============================="
+    echo -e "${GREEN}Re-compiling DWM"
+    echo -e "${GREEN}===============================${NC}"
+    
+    cd "$HOME/.config/suckless/dwm" || { echo "Directory not found: $HOME/.config/suckless/dwm"; exit 1; }
+    sudo make clean install
+    
+    echo -e "${GREEN}==============================="
+    echo -e "${GREEN}Re-compiling SLSTATUS"
+    echo -e "${GREEN}===============================${NC}"
+    
+    cd "$HOME/.config/suckless/slstatus" || { echo "Directory not found: $HOME/.config/suckless/slstatus"; exit 1; }
+    sudo make clean install
+    
+    cd ~
+
+    clear
+    
+    sleep 1;
+    
+    echo -e "${GREEN}------------------------------------"
+    echo -e "${GREEN}    DWM & SLStatus Re-Compiled!     "
+    echo -e "${GREEN}------------------------------------"
+    echo -e "${GREEN}Remember to Logout to apply changes."
+    echo -e "${GREEN}------------------------------------"
+}
+
+
 # Extracts any archive(s) (if unp isn't installed)
 extract() {
 	for archive in "$@"; do
@@ -660,3 +725,4 @@ export PATH=$PATH:"$HOME/.local/bin:$HOME/.cargo/bin:/var/lib/flatpak/exports/bi
 
 eval "$(starship init bash)"
 eval "$(zoxide init bash)"
+. "$HOME/.cargo/env"
