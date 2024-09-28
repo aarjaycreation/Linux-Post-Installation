@@ -1,33 +1,35 @@
 #!/bin/bash
 
-# Color definitions
-GREEN="\033[1;32m"
-RED="\033[1;31m"
-YELLOW="\033[1;33m"
-NC="\033[0m" # No Color
+# Define base directories
+USER_HOME="/home/$SUDO_USER"
+CONFIG_DIR="$USER_HOME/.config"
+SCRIPTS_DIR="$USER_HOME/Linux-Post-Installation"
 
-# Check if running as root
+# Check if script is running as root
 if [[ $EUID -ne 0 ]]; then
-   echo -e "${RED}This script must be run as root${NC}" 1>&2
-   exit 1
+    echo -e "${RED}This script must be run as root${NC}" 1>&2
+    exit 1
 fi
 
 echo -e "${YELLOW}Running script...${NC}"
 
-# Define destination and create directories
-DESTINATION="/home/$SUDO_USER/.config"
-mkdir -p "$DESTINATION"
-mkdir -p "/home/$SUDO_USER/scripts"
+# Create directories safely
+mkdir -p "$CONFIG_DIR"
+mkdir -p "$USER_HOME/scripts"
 
-echo -e "${GREEN}---------------------------------------------------"
-echo -e "            Installing dependencies"
-echo -e "---------------------------------------------------${NC}"
+# Navigate to scripts directory safely
+if [ -d "$SCRIPTS_DIR/scripts" ]; then
+    cd "$SCRIPTS_DIR/scripts"
+    chmod +x install_packages install_nala picom
+    ./install_packages
+else
+    echo -e "${RED}Directory $SCRIPTS_DIR/scripts does not exist.${NC}"
+    exit 1
+fi
 
-cd "/home/$SUDO_USER/Linux-Post-Installation/scripts" || exit
+# Continue with the rest of the script with similar checks...
 
-# Making scripts executable
-chmod +x install_packages install_nala picom
-./install_packages
+
 
 echo -e "${GREEN}---------------------------------------------------"
 echo -e "       Moving dotfiles to correct location"
